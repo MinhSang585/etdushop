@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sang
+namespace TeduShop.Model.Models
 {
-    public class Class1
+    [Table("Footers")]
+    public class Footer
     {
+
     }
 }
