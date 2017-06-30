@@ -16,6 +16,7 @@ namespace TedShop.Data
             this.Configuration.LazyLoadingEnabled = false;
         }
 
+        //trái tim của entities codefirst
         public DbSet<Footer> Footers { set; get; }
         public DbSet<Menu> Menus { set; get; }
         public DbSet<MenuGroup> MenuGroups { set; get; }

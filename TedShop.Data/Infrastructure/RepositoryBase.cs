@@ -9,7 +9,7 @@ using TedShop.Data;
 
 namespace TeduShop.Data.Infrastructure
 {
-    public abstract class RepositoryBase<T> where T : class
+    public abstract class RepositoryBase<T>: IRepository<T> where T : class
     {
         #region Properties
         private TeduShopDbContext dataContext;
@@ -72,7 +72,7 @@ namespace TeduShop.Data.Infrastructure
         {
             return dbSet.Count(where);
         }
-
+        
         public IQueryable<T> GetAll(string[] includes = null)
         {
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
@@ -106,6 +106,8 @@ namespace TeduShop.Data.Infrastructure
             return dataContext.Set<T>().Where<T>(predicate).AsQueryable<T>();
         }
 
+        ////////////////////////////////////////
+        #region Phân trang
         public virtual IQueryable<T> GetMultiPaging(Expression<Func<T, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
         {
             int skipCount = index * size;
@@ -128,6 +130,7 @@ namespace TeduShop.Data.Infrastructure
             total = _resetSet.Count();
             return _resetSet.AsQueryable();
         }
+        #endregion Phân trang
 
         public bool CheckContains(Expression<Func<T, bool>> predicate)
         {
